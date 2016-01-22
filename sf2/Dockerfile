@@ -31,4 +31,8 @@ RUN chmod 777 /var/lib/php5
 # Fix permission for macos volume share ?
 RUN usermod -u 1000 www-data
 
+# Shared folder
+WORKDIR /var/www
+VOLUME /var/www
+
 ENTRYPOINT [ "/tmp/./docker-entrypoint.sh" ]
