@@ -10,6 +10,9 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && DEBIAN_FRONTEND=noninteract
 	&& docker-php-ext-install gd mbstring pdo pdo_mysql \ 
         && docker-php-ext-install curl ldap mcrypt xmlrpc
 
+# Enable rewrite module
+RUN a2enmod rewrite alias autoindex deflate expires headers include mime
+
 # Suppose current host user has uid 1000, it keep well permission on volume share
 RUN usermod -u 1000 www-data
 
