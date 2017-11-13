@@ -9,10 +9,6 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && DEBIAN_FRONTEND=noninteract
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y libmysqlclient-dev mysql-client postgresql-client sqlite3 --no-install-recommends && rm -rf /var/lib/apt/lists/*
 
 
-# create /var/www
-RUN mkdir -p /var/www && chown www-data: /var/www
-
-# launch with www-data user
 RUN useradd -u 1000 -s /bin/bash -d /home/modem -m modem 
 
 USER modem
