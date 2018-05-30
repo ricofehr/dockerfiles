@@ -19,6 +19,14 @@ RUN echo "deb https://packages.cloudfoundry.org/debian stable main" | sudo tee /
 RUN DEBIAN_FRONTEND=noninteractive apt-get update -y --force-yes
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y cf-cli
 
+# Install autopilot plugin
+RUN DEBIAN_FRONTEND=noninteractive wget -q https://github.com/contraband/autopilot/releases/download/0.0.6/autopilot-linux
+RUN DEBIAN_FRONTEND=noninteractive cf install-plugin -f autopilot-linux
+
+# Install bgd plugin
+RUN DEBIAN_FRONTEND=noninteractive cf add-plugin-repo CF-Community https://plugins.cloudfoundry.org
+RUN DEBIAN_FRONTEND=noninteractive cf install-plugin -f blue-green-deploy -r CF-Community
+
 # launch cf-cli with www-data user
 RUN mkdir -p /var/www
 RUN chown www-data: /var/www
