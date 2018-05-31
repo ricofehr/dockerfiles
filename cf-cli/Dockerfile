@@ -27,11 +27,7 @@ RUN DEBIAN_FRONTEND=noninteractive cf install-plugin -f autopilot-linux
 RUN DEBIAN_FRONTEND=noninteractive cf add-plugin-repo CF-Community https://plugins.cloudfoundry.org
 RUN DEBIAN_FRONTEND=noninteractive cf install-plugin -f blue-green-deploy -r CF-Community
 
-# launch cf-cli with www-data user
-RUN mkdir -p /var/www
-RUN chown www-data: /var/www
-RUN usermod -u 1000 www-data
-USER www-data
+# Default folder
 WORKDIR /app
 
 # launch cf cli
